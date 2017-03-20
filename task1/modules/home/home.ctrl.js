@@ -98,6 +98,7 @@ angular
                        $scope.search = item.name;
                        $scope.searchtype = "album";
                        $scope.searchresult.items.length = 0;
+					   document.getElementsByName("searchtype")[1].click();
                        $scope.showList();
                    }   
 	}
