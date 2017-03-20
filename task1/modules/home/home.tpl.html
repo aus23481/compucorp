@@ -1,0 +1,41 @@
+ <div id="loading"></div>
+
+   <!--container-->
+    <div class="container">
+     
+   
+    <div class="search-artist-label"> <h3>Search for an Artist/Album</h3></div>
+    <p>
+        <label class="radio-inline searchtype"><input type="radio" ng-click="initsearchType('artist');"   ng-model="input.searchtype" ng-value="artist" name="searchtype">Artist</label>
+        <label class="radio-inline searchtype"><input type="radio" ng-click="initsearchType('album');" ng-value="album" ng-model="input.searchtype" name="searchtype">Album</label>
+    </p>
+    <form id="search-form">
+        <input  autocomplete="off" type="text" list="artists" name="artists" ng-model="search" ng-change="getArtists()"   class="form-control input-lg" placeholder="Type an Artist Name"/>
+        <datalist id="artists">
+             <option ng-repeat="artist in artists" value="{{artist.name}}">
+        </datalist>
+        <input type="button" ng-click="showList()" class="btn btn-primary" value="Search" />
+    </form>
+    <div ng-if="searchresult.items.length>0" class="pagination-top-container"> <dir-pagination-controls pagination-id="item"></dir-pagination-controls></div>
+
+</div>
+   
+<div><h5>Search Results:</h5></div>
+
+<div id="results-template" ng-if="searchresult.items.length>0" >
+    <!--ng-repeat="item in searchresult.albums.items"-->
+    <div class="result-item" dir-paginate="item in searchresult.items | itemsPerPage: 10" pagination-id="item"> 
+        
+        <div ng-click="searchResultItemDetail(item)" style="background-image:url({{item.images[1].url}})" data-album-id="id" class="cover">{{item.name}}</div>
+        <div class="item-info" ><h2>{{searchtype | capitalize}} Name: {{item.name}}</h2> </div>
+        
+    </div>
+    
+    
+   <dir-pagination-controls pagination-id="item"></dir-pagination-controls>
+    
+</div>
+   
+ 
+  
+        
