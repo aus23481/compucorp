@@ -19,7 +19,7 @@ angular
         PageValues.description = "";
         $scope.test = 123;
         $scope.artists = [];
-        $scope.searchtype = "artist";
+        $scope.searchtype = "album";
         $scope.searchresult = "";
   /**
  * assign search type
@@ -47,7 +47,11 @@ angular
                      }).
                      success(function(data) {
                          $( "#loading" ).hide(); 
-                          $scope.artists = data.artists.items;
+                         
+						  if($scope.searchtype=="artist")
+							$scope.artists = data.artists.items;
+                         if($scope.searchtype=="album")
+							$scope.artists = data.albums.items;
                           $scope.showList();
                       }).
                      error(function(data, response) {
